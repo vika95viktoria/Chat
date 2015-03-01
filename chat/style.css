@@ -1,0 +1,46 @@
+.search {
+    width: 813px;
+    height: 100px;
+    position: absolute;
+    bottom: 50px;
+    border: solid 1px black;
+    right: 238px;
+}
+
+.layer {
+    text-align:left;
+    margin:0 auto;
+    margin-bottom:25px;
+    overflow: scroll;
+    width: 800px;
+    height: 400px;
+    padding: 5px;
+    border: solid 1px black;
+    position: absolute;
+    right: 238px;
+    background: #FFFAFA;
+
+}
+
+H1 {
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+    font-size: 200%;
+    font-weight: lighter;
+
+    text-align: center;
+    color:  #1E90FF;
+}
+H2 {
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+    font-size: 100%;
+    font-weight: lighter;
+    font-style: normal;
+    text-align: right;
+    color:  #1E90FF;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+}
+body{
+    background-color: #F4A460;
+}
