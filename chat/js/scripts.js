@@ -49,7 +49,7 @@ var a=0;
 
 function delegateEvent10(evtObj) {
 
-    if (evtObj.type === 'click' && evtObj.target.classList.contains('btn-success')) {
+    if (evtObj.type === 'click' && evtObj.target.classList.contains('btn-success') && control==1) {
         var nameText2 = document.getElementById('msgspace');
         Mess = nameText2.value;
 
