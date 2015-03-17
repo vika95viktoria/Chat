@@ -219,10 +219,9 @@ function run() {
     var element = document.getElementsByClassName('MyEl')[0];
 
     element.addEventListener('click', delegateEvent);
-   // element.addEventListener('dblclick', delegateEvent10);
     user=restoreName();
     addName(user);
-    var allMessages = restore() ;
+    var allMessages = restore() || [ theMessage('Вика','Привет' )];
     createAllMessages(allMessages);
 
 
