@@ -15,16 +15,14 @@ import java.util.Scanner;
 
 public class Client implements Runnable {
 
-   /* public static int uniqueId(int min, int max) {
+    public static int uniqueId(int min, int max) {
         Random rand = new Random();
         int randomNum =rand.nextInt((max - min) + 1) + min;
 
         return randomNum;
 
-    }*/
-    /* private List<String> history = new ArrayList<String>();
-     private List<String> users = new ArrayList<String>();
-     private List<Integer> ids = new ArrayList<Integer>();*/
+    }
+
     private List<JSONObject> history = new ArrayList<JSONObject>();
     private MessageExchange messageExchange = new MessageExchange();
     private String host;
@@ -69,9 +67,6 @@ public class Client implements Runnable {
             JSONObject jsonObject = messageExchange.getJSONObject(response);
             JSONArray jsonArray = (JSONArray) jsonObject.get("messages");
             for (Object o : jsonArray) {
-               /* JSONObject jObject=o.
-                System.out.println(o);
-                list.add(o.toString());*/
                 System.out.println( ((JSONObject)o).get("user") + " : " + ((JSONObject)o).get("message"));
                 list.add((JSONObject)o);
             }
@@ -95,12 +90,9 @@ public class Client implements Runnable {
         try {
             connection = getHttpURLConnection();
             connection.setDoOutput(true);
-
             connection.setRequestMethod("POST");
-
             DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-            //int t=uniqueId(1,1000);
-            byte[] bytes = messageExchange.getClientSendMessageRequest(this.user,message,10).getBytes();
+            byte[] bytes = messageExchange.getClientSendMessageRequest(this.user,message,uniqueId(1,1000)).getBytes();
             wr.write(bytes, 0, bytes.length);
             wr.flush();
             wr.close();
