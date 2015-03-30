@@ -20,18 +20,6 @@ public class MessageExchange {
     }
 
     public String getServerResponse(List<JSONObject> messages) {
-        /*JSONObject jsonObject = new JSONObject();
-        jsonObject.put("messages", messages);
-        jsonObject.put("token", getToken(messages.size()));
-        return jsonObject.toJSONString();*/
-      /*  JSONArray jsonArray = new JSONArray();
-        for (int i = 0; i < messages.size(); i++){
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("message",messages.get(i));
-            jsonObject.put("username",usernames.get(i));
-            jsonObject.put("id",ids.get(i));
-            jsonArray.add(jsonObject);
-        }*/
         JSONObject obj = new JSONObject();
         obj.put("messages",messages);
         obj.put("token", getToken(messages.size()));
