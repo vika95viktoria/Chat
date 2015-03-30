@@ -4,14 +4,18 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import org.json.simple.parser.ParseException;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.net.URL;
+import java.util.Scanner;
 import java.util.Map;
 
 
@@ -52,6 +56,10 @@ public class Server implements HttpHandler {
             response = doGet(httpExchange);
         } else if ("POST".equals(httpExchange.getRequestMethod())) {
             doPost(httpExchange);
+        } else if ("DELETE".equals(httpExchange.getRequestMethod())) {
+            delete(httpExchange);
+        } else if ("PUT".equals(httpExchange.getRequestMethod())) {
+            doEdit(httpExchange);
         } else {
             response = "Unsupported http method: " + httpExchange.getRequestMethod();
         }
@@ -81,10 +89,52 @@ public class Server implements HttpHandler {
             String msg = message.get("message").toString();
             String username = message.get("user").toString();
             System.out.println("Get Message from  " + username+": "+ msg);
-           // System.out.println("Get Message from "+ message.get("user") + " : " + message.get("message"));
             history.add(message);
         } catch (ParseException e) {
             System.err.println("Invalid user message: " + httpExchange.getRequestBody() + " " + e.getMessage());
+        }
+    }
+
+    private void delete(HttpExchange httpExchange) {
+
+            String query = httpExchange.getRequestURI().getQuery();
+            if (query != null) {
+                Map<String, String> map = queryToMap(query);
+                String token = map.get("token");
+                if (token != null && !"".equals(token)) {
+                    int index = messageExchange.getIndex(token);
+                    (history.get(index)).put("message", "");
+                }
+        }
+    }
+
+    private void doEdit(HttpExchange httpExchange) {
+
+        String query = httpExchange.getRequestURI().getQuery();
+
+
+        if (query != null) {
+            Map<String, String> map = queryToMap(query);
+            String token = map.get("token");
+            if (token != null && !"".equals(token)) {
+                int index = messageExchange.getIndex(token);
+                JSONObject jsonObject = history.get(index);
+                String smg = jsonObject.get("message").toString();
+                String eduser = jsonObject.get("user").toString();
+                JSONObject jsonObject2 = history.get(history.size() - 1);
+                String curuser = jsonObject2.get("user").toString();
+              //  if (curuser == eduser) {
+                    if (smg != "") {
+                        System.out.println("Put the alternative text for " + smg);
+                        Scanner scanner2 = new Scanner(System.in);
+                        String newmessage = scanner2.nextLine();
+                        (history.get(index)).put("message", newmessage);
+                    } else
+                        System.out.println("Sorry, you can't edit this message, because it has been deleted");
+              /*  }
+                else
+                    System.out.println("Sorry, you can't edit this message, because it's not your's");*/
+            }
         }
     }
 
