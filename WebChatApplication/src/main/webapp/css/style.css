@@ -1,0 +1,62 @@
+.search {
+    width: 10%;
+    height: 1%;
+    position: absolute;
+    bottom: 5%;
+    border: solid 1px black;
+    right: 10%;
+}
+H1 {
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+    font-size: 200%;
+    font-weight: lighter;
+
+    text-align: center;
+    color:  #1E90FF;
+}
+H2 {
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+    font-size: 100%;
+    font-weight: lighter;
+    font-style: normal;
+    text-align: right;
+    color:  #1E90FF;
+    position: absolute;
+    right: 0%;
+    top: 0%;
+}
+body{
+    position: absolute;
+    height: 100%;
+    width:100%;
+    background-color: #F4A460;
+}
+
+.layer {
+    text-align:left;
+    margin:0 auto;
+    margin-bottom:25px;
+    overflow: scroll;
+    width: 60%;
+    height: 60%;
+    padding: 5px;
+    border: solid 1px black;
+    position: absolute;
+    right: 15%;
+    background: #FFFAFA;
+
+}
+
+.edit-btn {
+
+          width: 5% ;
+          color: green;
+          float: right;
+}
+
+.block {
+float: right;
+padding-right: 4%;
+padding-left: 0;
+border-left: 0;
+}
